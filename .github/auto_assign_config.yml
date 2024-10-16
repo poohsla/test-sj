@@ -11,4 +11,4 @@
 
  # 지정한 숫자만큼 리뷰어가 등록
  # 0으로 설정하면 모든 리뷰어가 지정 (default: 0)
- numberOfReviewers: 0
+ numberOfReviewers: 2
