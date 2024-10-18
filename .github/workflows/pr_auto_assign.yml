@@ -4,7 +4,8 @@ on:
     types: [opened, ready_for_review]
 permissions:
   contents: read
-  checks: write	# 추가
+  checks: write
+  pull-requests: write
   
 jobs:
   add-reviews:
@@ -12,5 +13,6 @@ jobs:
     steps:
       - uses: kentaro-m/auto-assign-action@v2.0.0
         with:
+          repo-token: '${{ secrets.GITHUB_TOKEN }}'
           configuration-path: '.github/auto_assign_config.yml' 
           # .github/auto_assign.yml 이면 따로 설정할 필요가 없음
