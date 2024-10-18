@@ -12,6 +12,7 @@ jobs:
             - name: 'Auto-assign PR'
               uses: wow-actions/auto-assign@v3
               with:
+                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
                   reviewers: |
                     djpark0402
                     k3255
