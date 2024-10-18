@@ -10,7 +10,7 @@ jobs:
             pull-requests: write
         steps:
             - name: 'Auto-assign PR'
-              uses: pozil/auto-assign-issue@v2
+              uses: wow-actions/auto-assign@v3
               with:
                   repo-token: ${{ secrets.GITHUB_TOKEN }}
                   reviewers: |
