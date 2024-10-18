@@ -1,13 +1,21 @@
-name: Auto Assign
+name: PR assignment
 on:
-  pull_request:
-    types: [opened, ready_for_review]
-permissions:
-  contents: read
-  pull-requests: write
-  
+    pull_request:
+        types: [opened, edited, synchronize, reopened, ready_for_review]
+
 jobs:
-  add-reviews:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: kentaro-m/auto-assign-action@v2.0.0
+    auto-assign:
+        runs-on: ubuntu-latest
+        permissions:
+            pull-requests: write
+        steps:
+            - name: 'Auto-assign PR'
+              uses: pozil/auto-assign-issue@v2
+              with:
+                  repo-token: ${{ secrets.GITHUB_TOKEN }}
+                  reviewers: |
+                    djpark0402
+                    k3255
+                  assignees: djpark0402, k3255
+                  numOfReviewer: 2
+                  numOfAssignee: 2
