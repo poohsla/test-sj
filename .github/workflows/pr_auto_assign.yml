@@ -16,6 +16,8 @@ jobs:
                   reviewers: |
                     djpark0402
                     k3255
-                  assignees: djpark0402, k3255
+                  assignees: |
+                    djpark0402
+                    k3255
                   numOfReviewer: 2
                   numOfAssignee: 2
