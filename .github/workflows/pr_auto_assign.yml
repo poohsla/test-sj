@@ -23,3 +23,15 @@ jobs:
               issue_number: context.payload.pull_request.number,
               assignees: assignees
             });
+      - name: Request Reviewers
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const reviewers = ['djpark0402', 'k3255']; // 리뷰어로 할당할 사용자 목록
+
+            await github.rest.pulls.requestReviewers({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.payload.pull_request.number,
+              reviewers: reviewers
+            });
