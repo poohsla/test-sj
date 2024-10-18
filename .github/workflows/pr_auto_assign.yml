@@ -4,20 +4,17 @@ on:
         types: [opened, edited, synchronize, reopened, ready_for_review]
 
 jobs:
-    auto-assign:
-        runs-on: ubuntu-latest
-        permissions:
-            pull-requests: write
-        steps:
-            - name: 'Auto-assign PR'
-              uses: wow-actions/auto-assign@v3
-              with:
-                  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-                  reviewers: |
-                    djpark0402
-                    k3255
-                  assignees: |
-                    djpark0402
-                    k3255
-                  numOfReviewer: 2
-                  numOfAssignee: 2
+  auto-assign:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Assign PR author and reviewers
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const assignees = ['djpark0402', 'k3255']; // 자동으로 할당할 사용자
+            await github.issues.addAssignees({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.payload.pull_request.number,
+              assignees: assignees
+            });
