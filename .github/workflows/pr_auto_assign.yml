@@ -1,12 +1,17 @@
-name: 'Auto Assign'
+name: Auto Assign
 on:
+  issues:
+    types: [opened, edited, labeled, unlabeled]
   pull_request:
-    types: [opened, ready_for_review]
-
+    types: [opened, edited, labeled, unlabeled, ready_for_review]
 jobs:
-  add-reviews:
+  run:
     runs-on: ubuntu-latest
     steps:
-      - uses: kentaro-m/auto-assign-action@v2.0.0
+      - uses: wow-actions/auto-assign@v3
         with:
-          configuration-path: '.github/auto_assign_config.yml'
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          reviewers: |
+            djpark0402
+            k3255
+          assignees: k3255, ss40760000
