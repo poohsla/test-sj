@@ -1,12 +1,38 @@
-name: 'Auto Assign'
+name: PR assignment
 on:
-  pull_request:
-    types: [opened, ready_for_review]
-
+    pull_request_target:
+        types: [opened, edited, synchronize, reopened, ready_for_review]
+        
+permissions:
+  contents: read
+  issues: write
+  pull-requests: write
+  
 jobs:
-  add-reviews:
+  auto-assign:
     runs-on: ubuntu-latest
     steps:
-      - uses: kentaro-m/auto-assign-action@v2.0.0
+      - name: Assign PR author and reviewers
+        uses: actions/github-script@v6
         with:
-          configuration-path: '.github/auto_assign_config.yml'
+          script: |
+            const assignees = ['djpark0402', 'k3255']; // assignees
+            
+            await github.rest.issues.addAssignees({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.payload.pull_request.number,
+              assignees: assignees
+            });
+      - name: Request Reviewers
+        uses: actions/github-script@v6
+        with:
+          script: |
+            const reviewers = ['djpark0402', 'k3255']; // reviewers
+
+            await github.rest.pulls.requestReviewers({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: context.payload.pull_request.number,
+              reviewers: reviewers
+            });
