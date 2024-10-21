@@ -16,7 +16,8 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
-            const assignees = ['djpark0402', 'k3255']; // 자동으로 할당할 사용자
+            const assignees = ['djpark0402', 'k3255']; // assignees
+            
             await github.rest.issues.addAssignees({
               owner: context.repo.owner,
               repo: context.repo.repo,
@@ -27,7 +28,7 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
-            const reviewers = ['djpark0402', 'k3255']; // 리뷰어로 할당할 사용자 목록
+            const reviewers = ['djpark0402', 'k3255']; // reviewers
 
             await github.rest.pulls.requestReviewers({
               owner: context.repo.owner,
